@@ -1,0 +1,37 @@
+﻿@model Pedidos
+    
+
+@if (Model == null){
+<div class="container p-3 mb-2 bg-warning text-white">
+    <h5>O pedido não existe nos registros!</h5>
+</div>
+}
+else {
+
+<h1>Pedido @Model.Id</h1>
+
+
+<dl class="row table table-striped table-dark">
+    <dt class="col-sm-3">@Html.DisplayNameFor(Model => Model.Id)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(Model => Model.Id)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(Model => Model.livro.Nome)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(Model => Model.livro.Nome)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(Model => Model.quantidade)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(Model => Model.quantidade)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(Model => Model.endereco)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(Model => Model.endereco)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(Model => Model.livro.Sinopse)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(Model => Model.livro.Sinopse)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(Model => Model.livro.Autor)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(Model => Model.livro.Autor)</dd>
+
+    <dt class="col-sm-3">@Html.DisplayNameFor(Model => Model.livro.Lancamento)</dt>
+    <dd class="col-sm-9">@Html.DisplayFor(Model => Model.livro.Lancamento)</dd>
+</dl>
+
+}

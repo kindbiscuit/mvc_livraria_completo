@@ -1,0 +1,81 @@
+﻿@model List<Livros>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+
+<h2>Lista de livros do @ViewBag.nome</h2>
+@if (SignInManager.IsSignedIn(User))
+{
+<a class="btn btn-link" asp-controller="Livros" asp-action="Create">Adicionar um novo livro!</a>
+}
+<form class="row">
+    <div class="col col-md-4 ">
+        <input type="text" class="form-control" name="busca" placeholder="Buscar..." />
+    </div>
+    <div class="col col-md-2">
+        <button type="submit" class=" btn-inf table-dark">Buscar!</button>
+    </div>
+</form>
+
+<form>
+    <select name="service" class="col-form-label" style="margin-top:5px;">
+        <option value="sql">SQL</option>
+        <option value="static">Estático</option>
+        <option value="both">Ambos</option>
+    </select>
+    <button type="submit" class="col-form-label">Atualizar!</button>
+</form>
+
+
+
+<div class="col-form-label">
+    <div class="col-form-label">
+        @if (ViewBag.ordenar == true)
+        {
+            <a asp-action="Index" class="btn-inf table-dark">Remover ordenação!</a>
+        }
+        else
+        {
+            <a href="?ordenar=true" class="btn-inf table-dark">Ordenar!</a>
+        }
+    </div>
+</div>
+
+
+<table class="table table-striped table-light">
+    <thead class="thead-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(Model => Model.First().Id)</th>
+            <th>@Html.DisplayNameFor(Model => Model.First().Nome)</th>
+            <th>Ações</th>
+
+    </thead>
+    <tbody>
+        @foreach (Livros livro in Model)
+        {
+            <tr>
+                <td> @Html.DisplayFor(Model => livro.Id) </td>
+                <td> @Html.DisplayFor(Model => livro.Nome) </td>
+                <td>
+                    @if (ViewBag.service == "sql")
+                    {
+                        <a class="btn btn-outline-secondary" asp-controller="Livros" asp-action="Read" asp-route-id="@livro.Id">Visualizar</a>
+                        <span>|</span>@if (SignInManager.IsSignedIn(User))
+                        {
+                            <a class="btn btn-outline-secondary" asp-controller="Livros" asp-action="Update" asp-route-id="@livro.Id">Editar</a>
+                        <span>|</span>
+                        <a class="btn btn-outline-secondary" asp-controller="Livros" asp-action="Delete" asp-route-id="@livro.Id">Deletar</a>
+                          }
+                        }
+                        else
+                        {
+                        <p>Não há ações a serem realizadas.</p>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h5>Possuimos @ViewBag.total livros no nosso catálogo!</h5>

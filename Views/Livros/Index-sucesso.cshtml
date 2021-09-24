@@ -1,0 +1,34 @@
+﻿@model List<Livros>
+
+
+<h2>Lista de livros!</h2>
+<div class="container p-3 mb-2 bg-success text-white">
+    <h5>Livro adicionado com sucesso!</h5>
+</div>
+<a class="btn btn-link" asp-controller="Livros" asp-action="Create">Adicionar um novo livro!</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(Model => Model.First().Id)</th>
+            <th>@Html.DisplayNameFor(Model => Model.First().Nome)</th>
+            <th>@Html.DisplayNameFor(Model => Model.First().Autor)</th>
+            <th>@Html.DisplayNameFor(Model => Model.First().Sinopse)</th>
+            <th>@Html.DisplayNameFor(Model => Model.First().Edicao)</th>
+            <th>@Html.DisplayNameFor(Model => Model.First().Lancamento)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Livros livro in Model)
+        {
+        <tr>
+            <td> @Html.DisplayFor(Model => livro.Id) </td>
+            <td> @Html.DisplayFor(Model => livro.Nome) </td>
+            <td> @Html.DisplayFor(Model => livro.Autor) </td>
+            <td> @Html.DisplayFor(Model => livro.Sinopse) </td>
+            <td> @Html.DisplayFor(Model => livro.Edicao) </td>
+            <td> @Html.DisplayFor(Model => livro.Lancamento) </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,32 @@
+﻿@model List<Pedidos>
+
+
+<h2>Seus pedidos!</h2>
+<a class="btn btn-link" asp-action="Create">Fazer um novo pedido!</a>
+
+<table class="table table-striped table-light">
+    <thead class="thead-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(Model => Model.First().Id)</th>
+            <th>@Html.DisplayNameFor(Model => Model.First().quantidade)</th>
+            <th>@Html.DisplayNameFor(Model => Model.First().livro.Nome)</th>
+            <th>Ações</th>
+
+</thead>
+    <tbody>
+        @foreach (Pedidos pedido in Model)
+        {
+        <tr>
+            <td> @Html.DisplayFor(Model => pedido.Id) </td>
+            <td> @Html.DisplayFor(Model => pedido.quantidade) </td>
+            <td> @Html.DisplayFor(Model => pedido.livro.Nome) </td>
+            <td>
+                <a class="btn btn-outline-secondary" asp-action="Read" asp-route-id="@pedido.Id">Visualizar</a> |
+                <a class="btn btn-outline-secondary" asp-action="Update" asp-route-id="@pedido.Id">Editar</a> |
+                <a class="btn btn-outline-secondary" asp-action="Delete" asp-route-id="@pedido.Id">Deletar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<h6>Você possui @ViewBag.totalPedidos pedido(s) aberto(s).</h6>
